@@ -1,6 +1,23 @@
+infinity = float("inf")
 costs = {}
+costs["a"] = 6
+costs["b"] = 2
+costs["fin"] = infinity
 
-grafo["a"] = ["alice", "bob", "claire"]
+parents = {}
+parents["a"] = "start"
+parents["b"] = "start"
+parents["fin"] = None
+
+graph = {}
+graph["a"] = {}
+graph["a"]["fin"] = 1
+
+graph["b"] = {}
+graph["b"]["a"] = 3
+graph["b"]["fin"] = 5
+
+graph["fin"] = {}
 
 processed = []
 
@@ -20,10 +37,13 @@ node = find_low_cost(costs)
 while node is not None:
     cost = costs[node]
     neighbor = graph[node]
-    for n in neighbor.key():
-        new_cost = cost + neighbot[n]
+    for n in neighbor.keys():
+        new_cost = cost + neighbor[n]
         if costs[n] > new_cost:
             costs[n] = new_cost
-            father[n] = node
+            parents[n] = node
     processed.append(node)
     node = find_low_cost(costs)
+
+print("Cost from the start to each node:")
+print(costs)
